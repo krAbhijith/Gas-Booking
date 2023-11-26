@@ -5,10 +5,7 @@
 }
 .container{
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-}
-.hidden{
-    opacity: 0;
+    height: 100vh;
 }
 .section-left{
     display: flex;
@@ -19,13 +16,15 @@
     background: linear-gradient(rgba(0, 0, 0, 0.692), rgba(0, 0, 0, 0.692)), url('Assets/bg1.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    position: relative;
 }
 .section-right{
     padding: 0px 15px;
     padding-top: 20px;
     background-color: rgba(0, 0, 0, 0.911);
+    display: none;
 }
-input[type='text']{
+#cId{
     height: 40px;
     background-color: transparent;
     font-size: larger;
@@ -36,6 +35,35 @@ input[type='text']{
     border: 2px rgba(0, 0, 0, 0.692) solid;
     border-radius: 10px;
     text-align: center;
+}
+.form-div{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    row-gap: 8px;
+    display: none;
+}
+.form-div > label{
+    justify-self: center;
+}
+.form-inp{
+    background-color: rgba(43, 43, 43, 0.733);
+    border: 2px rgba(0, 0, 0, 0.692) solid;
+    border-radius: 4px;
+    padding-left: 8px;
+}
+.btn-new-bill{
+    background: url(Assets/add.png);
+    border: none;
+    height: 72px;
+    width: 72px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+input[type='button']{
+    cursor: pointer;
 }
 label{
     font-size: 25px;
@@ -72,6 +100,12 @@ nav{
     background-size: contain;
     background-color: transparent;
 }
+.form-class > .btn-done{
+    height: 4rem;
+    width: 4rem;
+    justify-self: center;
+    display: none;
+}
 .btn-place,
 .btn-log{
     background-color: rgba(127, 255, 212, 0.733);
@@ -87,31 +121,39 @@ nav{
 .head-div{
     text-align: center;
 }
-.bill, .heading{
+.bill,
+.heading,
+.deliveredBill{
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr) 50px;
     margin-bottom: 8px;
-    font-size: 12px;
+    font-size: 14px;
     text-align: center;
 }
+.deliveredBill,
+.heading-log{
+    grid-template-columns: repeat(4, 1fr);
+    font-size: 14px;
+}
 .heading{
+    display: none;
     font-weight: bolder;
     font-size: 20px;
-    display: none;
-}
-.active{
-    display: grid;
 }
 .error:focus{
     outline: 2px solid red;
     border: 1px solid red;
 }
 
-
-
-
-@media (max-width: 480px){
+.active{
+    display: grid;
+}
+.active-section-right{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+@media (max-width: 1024px){
     .container{
         grid-template-columns: 1fr;
     }

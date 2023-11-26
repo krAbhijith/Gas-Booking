@@ -5,6 +5,11 @@ const DISPLAY_TABLE = document.querySelector(".displayTable");
 const C_NO_FIELD = document.querySelector("#cId");
 const HEAD_BOOKING = document.querySelector('#heading-booking');
 const HEAD_LOG = document.querySelector('#heading-log');
+const SECTION_RIGHT = document.querySelector('#section-right');
+const CONTAINER = document.querySelector('#container');
+const FORM_DIV = document.querySelector('#form-div');
+const STORE_BTN = document.querySelector('#btn-store');
+const ADD_BTN = document.querySelector('#btn-add');
 
 // const PLACES = ['Pazhayannur', 'Vadakkethara', 'Kallepadam', 'Kumbalakode', 'Vennur', 'Thirumani', 'Elanad', 'Thrikanaya'];
 
@@ -17,7 +22,6 @@ if (!localStorage.getItem('consumers')) {
         consumerArray.push(...data);
         localStorage.setItem('consumers', JSON.stringify(consumerArray));
         location.reload();
-        display();
       })
       .catch(error => {
         console.error('Error fetching JSON:', error);
@@ -27,7 +31,6 @@ if (!localStorage.getItem('consumers')) {
     localStorage.getItem('consumers')
   )
   // console.log(consumerArray);
-  display();
 }
 
 
@@ -52,7 +55,7 @@ function display(place) {
         <div class="bill">
         <div class="field">${element.id}</div>
         <div class="field">${element.place}</div>
-        <div class="field">${element.phone}</div>
+        <p class="field"> +91 \xa0 ${element.phone}</p>
         <div class="field">${element.name}</div>
         <div class="field"><input type="button" class="btn-done" onclick="removeBooking(${element.id})"></div>
         </div>
@@ -60,9 +63,12 @@ function display(place) {
     }
   });
   // console.log(HTML);
+  CONTAINER.classList.add('active-section-right');
+  SECTION_RIGHT.style.display = 'block';
   HEAD_BOOKING.classList.add('active');
   HEAD_LOG.classList.remove('active');
   DISPLAY_TABLE.innerHTML = HTML;
+  redirectTo()
 }
 
 
@@ -102,32 +108,36 @@ function addBooking(id) {
     if(bill){
       bill.booking = "True";
       saveToLocalStorage();
-      display();
+      display(bill.place);
     }else{
       console.log('no bill');
       validationError();
     }
-    
   }
-
+  C_NO_FIELD.value =  '';
 }
 
 
-// function store(id, place, phone, name){
-//     var valid = validation(id, phone);
-//     if(valid){
-//         bill = {
-//             "id" : id,
-//             "place" : place,
-//             "phone" : phone,
-//             "name" : name
-//         };
-//         saveToLocalStorage(bill);
-//     }else{
-//         console.log('input err');
-//     }
-//     display();
-// }
+function store(id, place, phone, name){
+    var valid = validation(id, phone);
+    if(valid){
+        bill = {
+            "id" : id,
+            "name" : name,
+            "place" : place,
+            "phone" : phone,
+            "booking": 'True',
+            "deliveryDate": ''
+        };
+        console.log(bill);
+        saveToLocalStorage(bill);
+    }else{
+        console.log('input err');
+    }
+    FORM_DIV.classList.remove('active');
+    STORE_BTN.style.display = 'none';
+    ADD_BTN.style.display = 'block';
+}
 
 
 function removeBooking(id) {
@@ -193,7 +203,7 @@ function todayLog() {
     if (deliveryDate == date) {
       deliverytime = (bill.deliveryDate).slice(6, 11);
       HTML += `
-        <div class="bill">
+        <div class="deliveredBill">
           <div class="field">${bill.id}</div>
           <div class="field">${bill.place}</div>
           <div class="field">${bill.name}</div>
@@ -203,6 +213,8 @@ function todayLog() {
     }
   });
   //console.log(HTML);
+  CONTAINER.classList.add('active-section-right');
+  SECTION_RIGHT.style.display = 'block';
   HEAD_LOG.classList.add('active');
   HEAD_BOOKING.classList.remove('active');
   DISPLAY_TABLE.innerHTML = HTML;
@@ -235,4 +247,10 @@ C_NO_FIELD.addEventListener('keypress', (e)=>{
 
 function redirectTo() {
   document.getElementById('targetDiv').scrollIntoView({behavior : "smooth"});
+}
+
+function activeStoreDiv() {
+  FORM_DIV.classList.add('active');
+  STORE_BTN.style.display = 'block';
+  ADD_BTN.style.display = 'none';
 }

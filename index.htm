@@ -7,27 +7,41 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="container">
         <section class="section-left">
-            <form action="" class="form-class">
+            <div class="form-class">
                 <label for="cId">Consumer Number</label>
-                <input type="text" name="cId" id="cId" >
-                <!-- Place:
-                <input type="text" name="place" id="place" value="hello">
-                <input list="placeList" name="place" id="place" autocomplete="off">
-                <datalist id="placeList">
-                    <option value="Pazhayannur">Pazhayannur</option>
-                    <option value="Kallepadam">Kallepadam</option>
-                    <option value="Vadakkethara">Vadakkethara</option>
-                    <option value="Kumbalakode">Kumbalakode</option>
-                </datalist>
-                Phone:
-                <input type="tel" name="phone" id="phone">
-                Name:
-                <input type="text" name="cName" id="cName"> -->
-                <input type="button" value="ADD" class="btn-add" onclick="addBooking(cId.value)">
-                <!-- <input type="button" value="Bookings" onclick="display('Elanad')"> -->
-            </form>
+                <input type="text" name="cId" id="cId">
+                <div class="form-div" id="form-div">
+                    <!-- <input list="placeList" name="place" id="place" autocomplete="off" placeholder="Place">
+                    <datalist id="placeList">
+                        <option value="Pazhayannur">Pazhayannur</option>
+                        <option value="Kallepadam">Kallepadam</option>
+                        <option value="Vadakkethara">Vadakkethara</option>
+                        <option value="Kumbalakode">Kumbalakode</option>
+                    </datalist> -->
+                    <label for="place">Place:</label>
+                    <select name="place" id="place" class="form-inp">
+                        <option value="Pazhayannur">Pazhayannur</option>
+                        <option value="Kallepadam">Kallepadam</option>
+                        <option value="Vadakkethara">Vadakkethara</option>
+                        <option value="Kumbalakode">Kumbalakode</option>
+                        <option value="Elanad">Elanad</option>
+                        <option value="Thrikanaya">Thrikanaya</option>
+                        <option value="Thirumani">Thirumani</option>
+                        <option value="Vennur">Vennur</option>
+                    </select>
+                    <label for="phone">Phone:</label>
+                    <input type="tel" name="phone" id="phone" placeholder="Phone NO" class="form-inp">
+                    <label for="cName">Name:</label>
+                    <input type="text" name="cName" id="cName" placeholder="Name" class="form-inp">
+                </div>
+                <input type="button" class="btn-done" id="btn-store" onclick="store(cId.value, place.value, phone.value, cName.value)">
+                <input type="button" value="ADD" class="btn-add" id="btn-add" onclick="addBooking(cId.value)">
+            </div>
+            <div class="div-new-bill">
+                <input type="button" class="btn-new-bill" onclick="activeStoreDiv()">
+            </div>
             <nav>
                 <input type="button" class="btn-place" onclick="display(this.value), redirectTo()" value="Pazhayannur">
                 <input type="button" class="btn-place" onclick="display(this.value), redirectTo()" value="Vadakkethara">
@@ -40,17 +54,17 @@
             </nav>
             <input type="button" value="Today Log" class="btn-log" onclick="todayLog()">
         </section>
-        <section class="section-right">
+        <section class="section-right" id="section-right">
             <div class="head-div">
-                <div class="heading active" id="heading-booking">
-                    <div class="field">Consumer NO</div>
+                <div class="heading" id="heading-booking">
+                    <div class="field">C_NO</div>
                     <div class="field">Place</div>
                     <div class="field">Phone</div>
                     <div class="field">Name</div>
                     <div class="field"></div>
                 </div>
-                <div class="heading" id="heading-log">
-                    <div class="field">Consumer Number</div>
+                <div class="heading heading-log" id="heading-log">
+                    <div class="field">C_NO</div>
                     <div class="field">Place</div>
                     <div class="field">Name</div>
                     <div class="field">Time</div>
