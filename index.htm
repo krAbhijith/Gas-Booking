@@ -4,66 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gas Booking</title>
-    <style>
-        .hidden{
-            opacity: 0;
-        }
-        .container, .head-div{
-            text-align: center;
-        }
-        .bill, .heading{
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            margin-bottom: 8px;
-        }
-        .heading{
-            font-weight: bolder;
-            font-size: larger;
-            display: none;
-        }
-        .active{
-            display: grid;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <form action="">
-        Consumer Number:
-        <input type="text" name="cId" id="cId" value="123456">
-        Place:
-        <!-- <input type="text" name="place" id="place" value="hello"> -->
-        <input list="placeList" name="place" id="place" autocomplete="off">
-        <datalist id="placeList">
-            <option value="Pazhayannur">Pazhayannur</option>
-            <option value="Kallepadam">Kallepadam</option>
-            <option value="Vadakkethara">Vadakkethara</option>
-            <option value="Kumbalakode">Kumbalakode</option>
-        </datalist>
-        Phone:
-        <input type="tel" name="phone" id="phone">
-        Name:
-        <input type="text" name="cName" id="cName">
-        <input type="button" value="Add" onclick="addBooking(cId.value)">
-        <input type="button" value="Today Log" onclick="todayLog()">
-        <input type="button" value="Bookings" onclick="display()">
-    </form>
-    <div class="head-div">
-        <div class="heading active" id="heading-booking">
-            <div class="field">Consumer Number</div>
-            <div class="field">Place</div>
-            <div class="field">Phone</div>
-            <div class="field">Name</div>
-            <div class="field"></div>
-        </div>
-        <div class="heading" id="heading-log">
-            <div class="field">Consumer Number</div>
-            <div class="field">Place</div>
-            <div class="field">Name</div>
-        </div>
-    </div>
-    <div class="container displayTable">
-        <!-- code will be added using javascript -->
+    <div class="container">
+        <section class="section-left">
+            <form action="" class="form-class">
+                <label for="cId">Consumer Number</label>
+                <input type="text" name="cId" id="cId" >
+                <!-- Place:
+                <input type="text" name="place" id="place" value="hello">
+                <input list="placeList" name="place" id="place" autocomplete="off">
+                <datalist id="placeList">
+                    <option value="Pazhayannur">Pazhayannur</option>
+                    <option value="Kallepadam">Kallepadam</option>
+                    <option value="Vadakkethara">Vadakkethara</option>
+                    <option value="Kumbalakode">Kumbalakode</option>
+                </datalist>
+                Phone:
+                <input type="tel" name="phone" id="phone">
+                Name:
+                <input type="text" name="cName" id="cName"> -->
+                <input type="button" value="ADD" class="btn-add" onclick="addBooking(cId.value)">
+                <!-- <input type="button" value="Bookings" onclick="display('Elanad')"> -->
+            </form>
+            <nav>
+                <input type="button" class="btn-place" onclick="display(this.value), redirectTo()" value="Pazhayannur">
+                <input type="button" class="btn-place" onclick="display(this.value), redirectTo()" value="Vadakkethara">
+                <input type="button" class="btn-place" onclick="display(this.value), redirectTo()" value="Kallepadam">
+                <input type="button" class="btn-place" onclick="display(this.value), redirectTo()" value="Kumbalakode">
+                <input type="button" class="btn-place" onclick="display(this.value), redirectTo()" value="Elanad">
+                <input type="button" class="btn-place" onclick="display(this.value), redirectTo()" value="Thrikanaya">
+                <input type="button" class="btn-place" onclick="display(this.value), redirectTo()" value="Thirumani">
+                <input type="button" class="btn-place" onclick="display(this.value), redirectTo()" value="Vennur">
+            </nav>
+            <input type="button" value="Today Log" class="btn-log" onclick="todayLog()">
+        </section>
+        <section class="section-right">
+            <div class="head-div">
+                <div class="heading active" id="heading-booking">
+                    <div class="field">Consumer NO</div>
+                    <div class="field">Place</div>
+                    <div class="field">Phone</div>
+                    <div class="field">Name</div>
+                    <div class="field"></div>
+                </div>
+                <div class="heading" id="heading-log">
+                    <div class="field">Consumer Number</div>
+                    <div class="field">Place</div>
+                    <div class="field">Name</div>
+                    <div class="field">Time</div>
+                </div>
+            </div>
+            <div id="targetDiv" class="bill-list displayTable">
+                <!-- code will be added using javascript -->
+            </div>
+        </section>
     </div>
 </body>
 <script src="script.js"></script>

@@ -1,0 +1,121 @@
+*{
+    color: white;
+    padding: 0;
+    margin: 0;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.hidden{
+    opacity: 0;
+}
+.section-left{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 100px;
+    padding-bottom: 20px;
+    background: linear-gradient(rgba(0, 0, 0, 0.692), rgba(0, 0, 0, 0.692)), url('Assets/bg1.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.section-right{
+    padding: 0px 15px;
+    padding-top: 20px;
+    background-color: rgba(0, 0, 0, 0.911);
+}
+input[type='text']{
+    height: 40px;
+    background-color: transparent;
+    font-size: larger;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: black;
+    background-color: rgba(127, 255, 212, 0.733);
+    border: 2px rgba(0, 0, 0, 0.692) solid;
+    border-radius: 10px;
+    text-align: center;
+}
+label{
+    font-size: 25px;
+    color: white;
+    margin-right: 10px;
+}
+.form-class{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.btn-add{
+    padding: 8px 40px;
+    background-color: rgba(127, 255, 212, 0.733);
+    border: 2px solid rgba(0, 0, 0, 0.692);
+    border-radius: 8px;
+    color: black;
+    font: larger bold;
+    transition: all .090s;
+}
+nav{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 2rem;
+    gap: 10px;
+}
+.btn-done{
+    background-image: url(Assets/done.png);
+    height: 24px;
+    width: 24px;
+    border: none;
+    background-size: contain;
+    background-color: transparent;
+}
+.btn-place,
+.btn-log{
+    background-color: rgba(127, 255, 212, 0.733);
+    padding: 1rem 1rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;
+    font-weight: bolder;
+}
+.btn-log{
+    background-color: rgb(46, 194, 145);
+}
+.head-div{
+    text-align: center;
+}
+.bill, .heading{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) 50px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    text-align: center;
+}
+.heading{
+    font-weight: bolder;
+    font-size: 20px;
+    display: none;
+}
+.active{
+    display: grid;
+}
+.error:focus{
+    outline: 2px solid red;
+    border: 1px solid red;
+}
+
+
+
+
+@media (max-width: 480px){
+    .container{
+        grid-template-columns: 1fr;
+    }
+    nav{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
