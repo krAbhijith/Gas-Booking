@@ -99,10 +99,11 @@ nav{
     border: none;
     background-size: contain;
     background-color: transparent;
+    justify-self: center;
 }
-.form-class > .btn-done{
-    height: 4rem;
-    width: 4rem;
+.form-class  .btn-store{
+    /* height: 4rem;
+    width: 4rem; */
     justify-self: center;
     display: none;
 }
@@ -141,7 +142,7 @@ nav{
     font-weight: bolder;
     font-size: 20px;
 }
-.error:focus{
+.error{
     outline: 2px solid red;
     border: 1px solid red;
 }

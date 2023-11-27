@@ -55,9 +55,10 @@ function display(place) {
         <div class="bill">
         <div class="field">${element.id}</div>
         <div class="field">${element.place}</div>
-        <p class="field"> +91 \xa0 ${element.phone}</p>
+        <div class="field"><a href="tel:+12${element.phone}">${element.phone}</a></div>
         <div class="field">${element.name}</div>
-        <div class="field"><input type="button" class="btn-done" onclick="removeBooking(${element.id})"></div>
+        <input type="button" class="btn-done" onclick="removeBooking(${element.id})"></input>
+        </div>
         </div>
       `
     }
@@ -71,14 +72,14 @@ function display(place) {
   redirectTo()
 }
 
-
+//<p class="field"> +91 \xa0 ${element.phone}</p>
 // function validates phoneNo and consumer number 
 
 function validation(id, phone) {
   var phoneno = /^\d{10}$/;
   var cNo = /^\d{6}$/;
   if (id.match(cNo) && phone.match(phoneno)) {
-    // console.log('matced');
+    //console.log('matced');
     return 1;
   }
 }
@@ -87,15 +88,9 @@ function validation(id, phone) {
 function validation(id) {
   var cNo = /^\d{6}$/;
   if (id.match(cNo)) {
-    // console.log('matced');
+    //console.log('matced');
     return 1;
   }
-}
-
-
-function validationError() {
-  C_NO_FIELD.classList.add('error');
-  console.log(C_NO_FIELD.classList);
 }
 
 
@@ -105,38 +100,52 @@ function addBooking(id) {
       (bill) => parseInt(bill.id) == id
     )
     bill = bill[0];
+    //console.log(bill);
     if(bill){
+      C_NO_FIELD.classList.remove('error');
       bill.booking = "True";
       saveToLocalStorage();
       display(bill.place);
+      C_NO_FIELD.value =  '';
     }else{
       console.log('no bill');
+      FORM_DIV.classList.add('active');
+      STORE_BTN.style.display = 'block';
+      ADD_BTN.style.display = 'none';
       validationError();
     }
+  }else{
+    validationError();
+    FORM_DIV.classList.add('active');
+    STORE_BTN.style.display = 'block';
+    ADD_BTN.style.display = 'none';
   }
-  C_NO_FIELD.value =  '';
 }
 
 
 function store(id, place, phone, name){
     var valid = validation(id, phone);
     if(valid){
-        bill = {
-            "id" : id,
-            "name" : name,
-            "place" : place,
-            "phone" : phone,
-            "booking": 'True',
-            "deliveryDate": ''
-        };
-        console.log(bill);
-        saveToLocalStorage(bill);
+      bill = {
+        "id": id,
+        "name": name,
+        "place": place,
+        "phone": phone,
+        "booking": 'True',
+        "deliveryDate": ''
+      };
+      //console.log(bill);
+      saveToLocalStorage(bill);
+      display(bill.place);
+      C_NO_FIELD.classList.remove('error');
+      FORM_DIV.classList.remove('active');
+      STORE_BTN.style.display = 'none';
+      ADD_BTN.style.display = 'block';
+      C_NO_FIELD.value =  '';
     }else{
-        console.log('input err');
+      console.log('input err');
+      validationError();
     }
-    FORM_DIV.classList.remove('active');
-    STORE_BTN.style.display = 'none';
-    ADD_BTN.style.display = 'block';
 }
 
 
@@ -250,7 +259,17 @@ function redirectTo() {
 }
 
 function activeStoreDiv() {
-  FORM_DIV.classList.add('active');
-  STORE_BTN.style.display = 'block';
-  ADD_BTN.style.display = 'none';
+  if (FORM_DIV.classList.contains('active')) {
+    FORM_DIV.classList.remove('active');
+    STORE_BTN.style.display = 'none';
+    ADD_BTN.style.display = 'block';
+  } else {
+    FORM_DIV.classList.add('active');
+    STORE_BTN.style.display = 'block';
+    ADD_BTN.style.display = 'none';
+  }
+}
+
+function validationError() {
+  C_NO_FIELD.classList.add('error');
 }
